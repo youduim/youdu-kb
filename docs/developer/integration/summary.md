@@ -8,7 +8,7 @@
 
 [有度开放平台](https://youdu.im/api/api.html#40011)
 
-## 集成概述
+### 集成概述
 
 有度服务端开放的接口，主要基于企业应用集成的模式，支持实现与企业的其他应用进行业务流程的整合、数据的交互等；集成中会使用企业总机号（buin）、企业应用ID（appid）进行身份验证，其中：
 
@@ -18,13 +18,13 @@
 
 <u>**服务端接口均使用http协议、Json数据格式（包括返回的数据）；主动调用时均需传入accessToken进行认证，同时必须做数据加密处理，accessToken参数由企业总机号（buin）、企业应用ID（appid）换取**</u>。
 
-## 集成流程
+### 集成流程
 
-### 1.获取企业应用ID
+#### 1.获取企业应用ID
 
 在有度管理后台—企业应用页面，打开一个自建应用，在应用的主页面可以获取到appid及EncodingAESKey；如果还没有企业应用，可以通过【创建应用】添加一个即可。
 
-### 2.换取accessToken
+#### 2.换取accessToken
 
 接口：POST请求URL：http://[SERVER:7080]/cgi/gettoken；[SERVER:7080]指连接的服务器地址。
 
@@ -54,7 +54,7 @@
 
 [查看有度加解密办法](https://youdu.im/api/api.html#40024)
 
-### 3.构造请求数据
+#### 3.构造请求数据
 
 主动调用有度服务端API接口，向有度用户发送文本消息时，使用Json格式来构造消息体msgJson：
 
@@ -78,7 +78,7 @@
 | msgType | 是   | 消息类型，这里固定为：text                                  |
 | content | 是   | 消息内容，支持表情，最长不超过600个字符，超出部分将自动截取 |
 
-### 4.加密封装请求
+#### 4.加密封装请求
 
 String <u>encrypt</u> = AESEncode(<u>msgJson</u>)。
 
@@ -88,7 +88,7 @@ encrypt用于最终的接口调用时的参数传入。
 
 [查看有度加解密办法](https://youdu.im/api/api.html#40024)
 
-### 5.调用接口发送消息
+#### 5.调用接口发送消息
 
 POST请求URL：http://[SERVER:7080]/cgi/msg/send?accessToken=$acess_token。
 
@@ -104,7 +104,7 @@ post的Json数据格式：
    }
 ```
 
-### 6.检查返回结果
+#### 6.检查返回结果
 
 ```
 {
