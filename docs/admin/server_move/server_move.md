@@ -144,7 +144,7 @@ cp -rvp ent_app_logo leveldb ~/youdu_backup$date/db
 
 　　<u>Windows系统</u>：
 
-　　打开任务管理器，键盘输入youdu，右键youdu_mysql进程，点击打开文件位置，按住shift键不放同时右键空白区域，点击在此处打开命令窗口。输入备份命令：
+　　打开任务管理器，选择进程或详细信息，键盘输入youdu，右键youdu_mysql进程，点击打开文件位置，按住shift键不放同时右键空白区域，点击在此处打开命令窗口。输入备份命令：
 
 ```COMMAND
 mysqldump -uroot -proot -v --database emoa_acc emoa_app emoa_auth emoa_bind emoa_clock emoa_dns emoa_file emoa_info emoa_msg emoa_msq emoa_netdisk emoa_push emoa_relation emoa_state emoa_statisc emoa_userportal emoa_view emoa_wx > backup目录\backup.sql
@@ -162,7 +162,7 @@ mysqldump -uroot -proot -v --database emoa_acc emoa_app emoa_auth emoa_bind emoa
 ```shell
 mysql -uroot -p -e"show databases"|grep -E "emoa"|xargs mysqldump --databases -uroot -p -v > ~/youdu_backup$date/youdu_all$(date +%Y%m%d_%H%M%S).sql
 ```
-　　命名结束后没有报错，说明导出完成。
+　　命令结束后没有报错，说明导出完成。
 
 !>如果数据量比较大，时间可能较久，在此期间请耐心等待。
 
@@ -217,7 +217,7 @@ systemctl stop youdu_service
 
 　　<u>Windows系统</u>：
 
-　　打开任务管理器，键盘输入youdu，右键youdu_mysql进程，点击打开文件位置，按住shift键不放同时右键空白区域，点击在此处打开命令窗口。输入以下命令：　
+　　打开任务管理器，点击进程或详细信息，键盘输入youdu，右键youdu_mysql进程，点击打开文件位置，按住shift键不放同时右键空白区域，点击在此处打开命令窗口。输入以下命令：　
 
 ```command
 　mysql -uroot -p -v < backup目录\backup.sql
