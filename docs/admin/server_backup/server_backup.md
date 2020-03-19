@@ -17,7 +17,7 @@
 
 - 备份完成存放在备份目录下（Youdu/server/backup/(backup-restore.json中指定)
 
-## Windows环境
+## Windows系统
 
 1. 运行命令提示符。
 
@@ -62,7 +62,7 @@
 
 ![1584498750927](1584498750927.png)
 
-## Linux环境
+## Linux系统
 
 1. 确认有度服务端安装路径。
 
