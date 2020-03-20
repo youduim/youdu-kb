@@ -1,8 +1,14 @@
+## 说明
+
+?>此文档主要面向管理员编写，如员工遇到客户端问题，建议先通过员工常见问题进行排查，排查后仍无法解决可以联系单位管理员，或者提交[工单](https://kf.youdu.im)。
+
 ## 基本使用问题
 
 ### 如何访问有度管理后台
 
 　　打开浏览器，输入有度管理后台地址：http://服务器IP:7080/userportal
+
+?>建议通过谷歌、火狐等浏览器访问。使用360等浏览器时，建议切换到内核、极速模式。
 
 ### 如何扩容授权用户数
 
@@ -92,6 +98,47 @@ firewall-cmd --zone=public --add-port={7006,7080,7443}/tcp --permanent && firewa
 
   iptables -I INPUT -p tcp -m multiport --dports 7006,7080,7443 -j ACCEPT && service iptables save && service iptables restart
 
+### 如何修改有度对外网开放的端口
+
+　　有度需要对外网开放7006、7080、7443三个端口；以下以Windows为例讲解对外端口的修改办法：
+
+1、在有度服务器上，登录mysql（可以使用sqlyog等工具)。
+
+2、执行以下语句：
+
+```mysql
+use emoa_dns;
+update t_service_addr set port=7006的新端口号 where port=7006;
+update t_service_addr set port=7080的新端口号 where port=7080;
+update t_service_addr set port=7443的新端口号 where port=7443;
+```
+
+3、修改配置文件
+
+进入有度服务器Youdu\Server\config文件夹：
+
+-修改svrlist.ini，
+
+找到[jgmfrontd]，`info.port = 7006的新端口号`
+
+-修改jgproxy.ini：
+
+修改`[:7080]`为`[:7080的新端口号]`
+
+修改`[:7443]`为`[:7443的新端口号]`
+
+4、修改打开功能配置
+
+修改Server/apps/clockapp/config.properties
+
+加一个配置项，`app.addr=127.0.0.1:7080的新端口`
+
+5、重启服务
+
+在有度经常中，杀掉以下进程即可（会自动重启):
+
+jgmfrontd、jgproxyd、jgclockapp
+
 ### 如何实现有度的第三方登录认证
 
 1、在有度管理后台—企业应用—组织架构同步接口中，点击选用【通过调用接口同步】
@@ -137,6 +184,23 @@ update emoa_acc.t_gid set authtype=2 WHERE acctype=0 AND authtype=0 AND deleted=
 ### 有度企业版（本地部署版）需要访问有度官网youdu.im的作用是什么
 
 　　在有度企业版的管理后台中，有访问有度开放平台的链接入口，该入口需要能访问有度官网。
+
+### 有度客户端消息收发过程
+
+　　　可以查看功能逻辑中的[有度消息收发](admin/functions/消息收发)。
+
+1. 客户端通过TCP(TLS Socket)通道登录成功，服务器返回用于https信息交互的token。
+2. 客户端将发送消息内容先进行base64，然后放进json协议包。
+3. 客户端将json协议包和token，通过https协议提交给服务器。
+4. 服务器验证token身份合法，将整个json数据包进行加密，把加密后的消息保存进leveldb或mongdb。
+
+### 有度客户端内置浏览器用的什么内核
+
+　　iOS、Mac端使用的是系统自带的webkit内核webview浏览器；Mac端部分情况会直接调用系统默认浏览器。
+
+　　android客户端用的是系统自带webkit内核webview浏览器
+
+　　Windows客户端用的Webkit内核webview浏览器
 
 ### 有度客户端内置浏览器的缓存时间是多久，用户是否可以控制缓存时长
 
@@ -197,47 +261,6 @@ netBandwidth = 100  // 网络带宽：100, 单位: Mbps
 
 　　上述数据当前逻辑判断,五秒内产生的流量是否大于100Mb * 0.95,大于则限流禁用jgfile=
 
-### 如何修改有度对外网开放的端口
-
-　　有度需要对外网开放7006、7080、7443三个端口；以下以Windows为例讲解对外端口的修改办法：
-
-1、在有度服务器上，登录mysql（可以使用sqlyog等工具)。
-
-2、执行以下语句：
-
-```mysql
-use emoa_dns;
-update t_service_addr set port=7006的新端口号 where port=7006;
-update t_service_addr set port=7080的新端口号 where port=7080;
-update t_service_addr set port=7443的新端口号 where port=7443;
-```
-
-3、修改配置文件
-
-进入有度服务器Youdu\Server\config文件夹：
-
--修改svrlist.ini，
-
-找到[jgmfrontd]，`info.port = 7006的新端口号`
-
--修改jgproxy.ini：
-
-修改`[:7080]`为`[:7080的新端口号]`
-
-修改`[:7443]`为`[:7443的新端口号]`
-
-4、修改打开功能配置
-
-修改Server/apps/clockapp/config.properties
-
-加一个配置项，`app.addr=127.0.0.1:7080的新端口`
-
-5、重启服务
-
-在有度经常中，杀掉以下进程即可（会自动重启):
-
-jgmfrontd、jgproxyd、jgclockapp
-
 ### 关闭文件自动上传群空间功能
 
 　　提供版本：2020.1 
@@ -264,7 +287,40 @@ jgmfrontd、jgproxyd、jgclockapp
 3. 在有度管理后台的通讯录中搜索到这个用户，重新设置一下该用户的部门信息。
 
 ## 故障问题
-### 重装有度后服务启动不了，命令窗口提示指定的服务已标记为删除
+### 服务端出现全员故障如何进行排查
+
+　　　这里说下排查思路：
+
+1. 检查客户端到服务器的网络访问，例如7006,7080,7443端口；
+2. 检查服务器的CPU、内存、磁盘IO、磁盘空间；
+3. 最后可以看下服务端安装目录/log下的log日志，例如jgservice.log
+
+### 登录不上
+
+
+
+### 消息收发失败
+
+1. 检查服务器网络是否正常；
+2. 检查服务器磁盘空间是否充足；
+3. 检查mysql服务是否正常；
+4. 检查服务器的整体运行情况，包括CPU
+
+### 有度客户端搜索不到联系人
+
+几种情况：
+
+1. 联系人实际存在，但搜不出来
+
+2. 联系人改过名字，但搜到的还是老的，组织架构显示的又是正确的
+
+　　解决办法：在有度服务器进程中杀掉jgaccount进程（会自动重启）再试。
+
+### 有度客户端文件上传网盘失败
+
+  在有度服务器进程中，杀掉 jgminio、jgnetdisk两个进程即可（系统会自动重启）。您使用的服务端版本可能比较旧，请更新到[官网版本](https://youdu.im/download.html)。
+
+### Windows重装有度后服务启动不了，命令窗口提示指定的服务已标记为删除
 
 1、升级有度服务，完成后管理后台登录不了，提示网页不存在。
 
@@ -280,28 +336,6 @@ jgmfrontd、jgproxyd、jgclockapp
 
 3. 查看一下手机端-工作面板-设置，是否存在打卡应用可选添加项。
 
-### 有度客户端文件上传网盘失败
-
-  在有度服务器进程中，杀掉 jgminio、jgnetdisk两个进程即可（系统会自动重启）。您使用的服务端版本可能比较旧，请更新到[官网版本](https://youdu.im/download.html)。
-
-### 有度客户端搜索不到联系人
-
-几种情况：
-
-1. 联系人实际存在，但搜不出来
-
-2. 联系人改过名字，但搜到的还是老的，组织架构显示的又是正确的
-
-　　解决办法：在有度服务器进程中杀掉jgaccount进程（会自动重启）再试。
-
-### 有度客户端内置浏览器用的什么内核
-
-　　iOS、Mac端使用的是系统自带的webkit内核webview浏览器；Mac端部分情况会直接调用系统默认浏览器。
-
-　　android客户端用的是系统自带webkit内核webview浏览器
-
-　　Windows客户端用的Webkit内核webview浏览器
-
 ### 如何手动修改讨论组人数上限
 在管理后台-我的企业-聊天管理，可以手动选择上限人数。部分用户可能需要自定义一个值，可以参考此方法。
 1. 登录mysql
@@ -316,13 +350,6 @@ jgmfrontd、jgproxyd、jgclockapp
 3. 重启进程jgauth、jgmsg。
 
 4. 客户端重新登录生效。
-
-### 有度客户端消息收发过程
-
-1. 客户端通过TCP(TLS Socket)通道登录成功，服务器返回用于https信息交互的token。
-2. 客户端将发送消息内容先进行base64，然后放进json协议包。
-3. 客户端将json协议包和token，通过https协议提交给服务器。
-4. 服务器验证token身份合法，将整个json数据包进行加密，把加密后的消息保存进leveldb或mongdb。
 
 ### 文件收发失败，服务器返回503服务不可用
 
