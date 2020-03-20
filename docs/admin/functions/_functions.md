@@ -21,6 +21,8 @@
 
 #### [客户端数据存储](admin/functions/客户端数据存储)
 
+#### [群空间、网盘](admin/functions/群空间、网盘)
+
 #### [音视频](admin/functions/音视频)
 
 #### [远程控制](admin/functions/远程控制)
