@@ -4,6 +4,7 @@
 * 管理员
   * [功能逻辑 ](admin/functions/_functions.md)
   * [常见问题](admin/admin_faq/admin_faq.md) 
+  * [消息审计安装](admin/server_audit/server_audit)
   * [服务端备份、恢复](admin/server_backup/server_backup.md)
   * [服务端升级](admin/server_upgrade/server_upgrade.md)
   * [服务端迁移](admin/server_move/server_move.md)
