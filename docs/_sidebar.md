@@ -9,8 +9,8 @@
   * [服务端备份、恢复](admin/server_backup/server_backup.md)
   * [服务端升级](admin/server_upgrade/server_upgrade.md)
   * [服务端迁移](admin/server_move/server_move.md)
-  * [RTX相关](admin/rtx/rtx_agent)
-    * [插件配置](admin/rtx/rtx_agent)
+  * <!--[RTX相关](admin/rtx/rtx_agent)
+    * [插件配置](admin/rtx/rtx_agent)-->
 * 开发者
   * [集成开发场景](developer/integration/integration.md)
   * [集成指引](developer/integration/summary.md)
