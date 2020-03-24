@@ -9,8 +9,9 @@
   * [服务端备份、恢复](admin/server_backup/server_backup.md)
   * [服务端升级](admin/server_upgrade/server_upgrade.md)
   * [服务端迁移](admin/server_move/server_move.md)
-  * <!--[RTX相关](admin/rtx/rtx_agent)
-    * [插件配置](admin/rtx/rtx_agent)-->
+  * [有度RTX插件安装配置](admin/rtx/rtx_agent/rtx_agent)
+  * [云免费版切换到本地部署版](admin/rtx/cloud_to_local/cloud_to_local)
+  * [RTX全面切换至有度即时通](admin/rtx/rtx_to_youdu/rtx_to_youdu)
 * 开发者
   * [集成开发场景](developer/integration/integration.md)
   * [集成指引](developer/integration/summary.md)

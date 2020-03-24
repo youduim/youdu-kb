@@ -1,4 +1,4 @@
-# 有度服务端全新部署指引
+# 有度服务端安装指南
 
 ## 安装说明
 
@@ -171,3 +171,7 @@ mysqladmin -uroot password 'Youdu123!!'
 10. 打开浏览器，输入有度管理后台地址，http://服务器IP:7080/userportal
 
 ![1584956869588](1584956869588.png)
+
+## 导入License即可开始使用
+
+　　详情请看[如何申请License授权并导入](admin/admin_faq/admin_faq?id=如何申请License授权并导入)

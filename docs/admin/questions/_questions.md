@@ -121,7 +121,7 @@ update t_service_addr set port=7443的新端口号 where port=7443;
 
 5、重启服务
 
-在有度经常中，杀掉以下进程即可（会自动重启):
+在有度进程中，杀掉以下进程即可（会自动重启):
 
 jgmfrontd.exe、jgproxyd.exe、jgclockapp.exe
 
