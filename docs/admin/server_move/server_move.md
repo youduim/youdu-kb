@@ -204,7 +204,7 @@ systemctl stop youdu_service
 
 ### 导入config目录
 
-!>Windows、Linux之间的迁移不需要拷贝此目录。
+!>旧服务器的config目录下文件如果手动特殊配置过，需要导入到新服务器。没有修改，可以不导入。如果有疑问请联系技术支持。
 
 　　将原来的config目录删除，拷贝backup目录下的config目录至此。
 
