@@ -4,11 +4,17 @@
 * 管理员
   * [功能逻辑 ](admin/functions/_functions.md)
   * [常见问题](admin/admin_faq/admin_faq.md) 
+* 安装、升级、备份恢复、迁移
   * [服务端安装](admin/server_install/server_install)
   * [消息审计安装](admin/server_audit/server_audit)
-  * [服务端备份、恢复](admin/server_backup/server_backup.md)
   * [服务端升级](admin/server_upgrade/server_upgrade.md)
+  * [服务端备份、恢复](admin/server_backup/server_backup.md)
   * [服务端迁移](admin/server_move/server_move.md)
+* 分布式服务部署配置
+  * [MySQL独立部署](admin/distributed_deployment/mysql/mysql)
+  * [文件服务独立部署](admin/distributed_deployment/file_service/file_service)
+  * [推送服务独立部署](admin/distributed_deployment/push/push)
+* RTX集成相关
   * [有度RTX插件安装配置](admin/rtx/rtx_agent/rtx_agent)
   * [云免费版切换到本地部署版](admin/rtx/cloud_to_local/cloud_to_local)
   * [RTX全面切换至有度即时通](admin/rtx/rtx_to_youdu/rtx_to_youdu)
