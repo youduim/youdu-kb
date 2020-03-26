@@ -8,17 +8,17 @@
 
 
 
-| 源地址                                | 目标地址                | 端口                                         | 备注                   |
-| ------------------------------------- | ----------------------- | -------------------------------------------- | :--------------------- |
-| main_ip                               | push_ip                 | 7012                                         | 主服务器访问推送服务器 |
-| push_ip                               | main_ip                 | 7020,7034,7026,7016,7001,7002,7009,7010,7015 | 推送服务器访问主服务器 |
-| push_ip                               | youdu.im, api.youdu.im, | 80、443                                      | 有度推送通道           |
-| ver.youdu.im                          | 443                     | PC客户端检测更新通道                         |                        |
-| api.push.hicloud.com, login.vmall.com | 443                     | 华为推送通道                                 |                        |
-| api.xmpush.xiaomi.com                 | 443                     | 小米推送通道                                 |                        |
-| server-api-push.meizu.com             | 80                      | 魅族推送通道                                 |                        |
-| gateway.push.apple.com                | 2195                    | 苹果推送通道                                 |                        |
-| feedback.push.apple.com               | 2196                    | 苹果推送通道（反馈）                         |                        |
+| 源地址  | 目标地址                              | 端口                                         | 备注                   |
+| ------- | ------------------------------------- | -------------------------------------------- | :--------------------- |
+| main_ip | push_ip                               | 7012                                         | 主服务器访问推送服务器 |
+| push_ip | main_ip                               | 7020,7034,7026,7016,7001,7002,7009,7010,7015 | 推送服务器访问主服务器 |
+| push_ip | youdu.im, api.youdu.im,               | 80、443                                      | 有度推送通道           |
+| push_ip | ver.youdu.im                          | 443                                          | PC客户端检测更新通道   |
+| push_ip | api.push.hicloud.com, login.vmall.com | 443                                          | 华为推送通道           |
+| push_ip | api.xmpush.xiaomi.com                 | 443                                          | 小米推送通道           |
+| push_ip | server-api-push.meizu.com             | 80                                           | 魅族推送通道           |
+| push_ip | gateway.push.apple.com                | 2195                                         | 苹果推送通道           |
+| push_ip | feedback.push.apple.com               | 2196                                         | 苹果推送通道（反馈）   |
 
 ## 推送服务器安装有度服务端
 
