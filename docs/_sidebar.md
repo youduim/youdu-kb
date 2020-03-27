@@ -14,6 +14,7 @@
   * [MySQL独立部署](admin/distributed_deployment/mysql/mysql)
   * [文件服务独立部署](admin/distributed_deployment/file_service/file_service)
   * [推送服务独立部署](admin/distributed_deployment/push/push)
+  * [代理服务部署](admin/distributed_deployment/proxy/proxyserver_install)
 * RTX集成相关
   * [有度RTX插件安装配置](admin/rtx/rtx_agent/rtx_agent)
   * [云免费版切换到本地部署版](admin/rtx/cloud_to_local/cloud_to_local)
