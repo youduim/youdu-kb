@@ -37,10 +37,6 @@
 
 ![img](./wps20.jpg) 
 
-### 关键数据备份
-
-　　请参考[备份指南](admin/server_backup/server_backup.md)。
-
 ## Windows系统升级有度服务端
 
 1. 上传有度服务端安装程序，版本流程参考注意事项
