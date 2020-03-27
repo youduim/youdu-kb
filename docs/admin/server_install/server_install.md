@@ -2,13 +2,9 @@
 
 ## 安装说明
 
-!>如果您没有Linux系统的命令使用等经验，**建议您使用windows版本，功能相同，支持一键安装部署。**
+　　服务端安装包下载地址：https://youdu.im/download.html　　
 
-　　服务端下载地址：https://youdu.im/download.html
-
-1. 本文内容基于CentOS 7作为操作系统环境进行编写，其它Linux发行版的有度服务端安装方法大同小异，请您根据实际情况进行安装。
-
-2. 安装过程中遇到问题需协助，请通过以下方式联系我们：
+　　安装过程中遇到问题需协助，请通过以下方式联系我们：
 
 - 提交工单（**建议**）：https://kf.youdu.im
 
@@ -71,19 +67,18 @@
 
 ## Linux服务端部署
 
+!>如果您没有Linux系统的命令使用等经验，**建议您使用windows版本，功能相同，支持一键安装部署。**
+
+　　以下内容基于CentOS 7作为操作系统环境进行编写，其它Linux发行版的有度服务端安装方法大同小异，请您根据实际情况进行安装。
+
 ### 部署数据库
 
-　　数据库采用MySQL Server，建议使用5.7版本，至少5.5版本。在安装有度服务端之前，请您确认数据库已经安装并且可以正常使用。并修改参数：
+　　数据库采用MySQL Server，建议使用5.7版本，至少5.5版本。在安装有度服务端之前，请您确认数据库已经安装并且可以正常使用。并修改配置文件/etc/my.cnf，新增参数：
 
 ```
-#1. mysql执行语句设置  
-
-set global group_concat_max_len = 102400;
-
-  
-
-#2. 配置文件添加参数  
-
+innodb_buffer_pool_size = 256M
+max_connections = 500
+max_connect_errors = 1000
 group_concat_max_len = 102400 
 ```
 
@@ -111,7 +106,10 @@ yum -y install mysql-server mysql
 3. 优化参数  
 
 ```
-cat >> /etc/my.cnf <<eof  
+cat >> /etc/my.cnf <<eof
+innodb_buffer_pool_size = 256M
+max_connections = 500
+max_connect_errors = 1000
 group_concat_max_len = 102400
 eof  
 ```
