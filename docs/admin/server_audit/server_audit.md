@@ -88,20 +88,20 @@ localhost:27017
 !>如果消息审计插件和有度服务端（主服务器）在一个服务器上， 不需要修改,可以忽略这一步。
 
 ```
-1	#编辑配置文件
-2	vim /usr/local/youdu_audit/audit/conf/app.conf
-3
-4	#修改总机号
-5	buin = 主服务器总机号
-6
-7	#修改主服务器访问地址
-8	youdu_api_addr = http://ip:7080
-9
-10	#修改消息审计的key
-11	youdu_api_key = 主服务器，可以在管理后台‐管理工具‐消息审计中查看EncodingAESK y
-12
-13	#重启消息审计服务
-14	systemctl restart youdu_audit
+#编辑配置文件
+vim /usr/local/youdu_audit/audit/conf/app.conf
+
+#修改总机号
+buin = 主服务器总机号
+
+#修改主服务器访问地址
+youdu_api_addr = http://ip:7080
+
+#修改消息审计的key
+youdu_api_key = 主服务器，可以在管理后台‐管理工具‐消息审计中查看EncodingAESK y
+
+#重启消息审计服务
+systemctl restart youdu_audit
 ```
 
 ## 登录有度后台，管理工具-消息审计，填写消息审计插件的回调地址URL。
