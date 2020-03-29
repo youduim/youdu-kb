@@ -42,16 +42,15 @@
 
 ```
 cat > /etc/yum.repos.d/mongodb‐org‐4.2.repo <<eof
-2 [mongodb‐org‐4.2]
-3 name=MongoDB Repository
-4 baseurl=https://mirrors.aliyun.com/mongodb/yum/redhat/7/mongodb‐org/4.2/x
-86_64/
-5 gpgcheck=1
-6 enabled=1
-7 gpgkey=https://www.mongodb.org/static/pgp/server‐4.2.asc
-8 eof
-9 yum install ‐y mongodb‐org
-10 systemctl start mongod
+[mongodb‐org‐4.2]
+name=MongoDB Repository
+baseurl=https://mirrors.aliyun.com/mongodb/yum/redhat/7/mongodb‐org/4.2/x86_64/
+gpgcheck=1
+enabled=1
+gpgkey=https://www.mongodb.org/static/pgp/server‐4.2.asc
+eof
+yum install ‐y mongodb‐org
+systemctl start mongod
 ```
 
 ### 上传消息审计插件安装包
