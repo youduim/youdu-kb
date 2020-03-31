@@ -90,37 +90,27 @@ mysqldump -uroot p - all-databases -v > backup.sql
 
 注意：如果用户多次出现断电mysql数据损坏的情况，建议用户将有度服务端迁移至一个稳定的服务器环境。
 
-## 服务器网络、防火墙策略
+## 网络设置
 
-### 有度服务端防火墙设置要求
+### 本地部署版防火墙开放策略
 
-安装完成后，如果服务器或者网络硬件设备有防火墙，需要映射如下端口： 
+| 源地址          | 目标地址                  | 端口           | 方向 | 说明                                                         |
+| --------------- | ------------------------- | -------------- | ---- | ------------------------------------------------------------ |
+| 0.0.0.0         | youdu_server_IP           | 7006,7080,7443 | 入站 | 客户端访问服务器。必须全部开放，缺一不可。                   |
+| rtx_server_IP   | youdu_server_IP           | 7014           | 入站 | RTX服务器访问有度服务器。RTX与有度并行时才需要开放，独立使用有度、非RTX用户无需开放。 |
+| youdu_server_IP | youdu.im                  | 80、443        | 出站 | [点击查看](admin/admin_faq/admin_faq?id=有度企业版（本地部署版）需要访问有度官网youduim的作用是什么) |
+| youdu_server_IP | ver.youdu.im              | 443            | 出站 | 管理后台获取PC端新版本                                       |
+| youdu_server_IP | api.youdu.im              | 80、443        | 出站 | 苹果手机，使用有度APP时的消息推送通道。                      |
+| youdu_server_IP | api.push.hicloud.com      | 443            | 出站 | 华为推送通道（接口）                                         |
+| youdu_server_IP | login.vmall.com           | 443            | 出站 | 华为推送通道（验证）                                         |
+| youdu_server_IP | api.push.hicloud.com      | 443            | 出站 | 小米推送通道                                                 |
+| youdu_server_IP | server-api-push.meizu.com | 80             | 出站 | 魅族推送通道                                                 |
+| youdu_server_IP | gateway.push.apple.com    | 2195           | 出站 | 苹果手机，使用定制版APP时的苹果推送通道                      |
+| youdu_server_IP | feedback.push.apple.com   | 2196           | 出站 | 苹果手机，使用定制版APP时的苹果推送通道（反馈）              |
 
-1) TCP 7080，服务器服务查询端口（**注意：客户端登录时填写的是这个端口**）； 
+　　以上端口均为TCP协议。请您根据实际需求和网络环境进行开放，如有疑问可以[联系我们](./)。
 
-2) TCP 7006，服务器登录端口，实际对外提供登录服务； 
-
-3) TCP 7443，后台服务均通过此代理端口对外提供服务； 
-
-从 RTX 腾讯通升级到有度即时通的用户需要注意，如果是有度服务器和 RTX 服务器分开部署在两台服务器上的情况，则需要在额外开放一个 TCP 7014 端口，否则 RTX 和有度服务器之间将无法正常并行使用。 
-
-为使推送服务正常运行，本服务器需要能访问以下地址、端口： 
-
-1） TCP80、TCP443，youdu.im(有度官网)； 
-
-2） TCP80、TCP443, api.youdu.im（有度推送通道）； 
-
-3） TCP443，api.vmall.com（华为推送通道（接口））； 
-
-4) TCP443，login.vmall.com（ 华为推送通道（验证））； 
-
-5) TCP443，api.xmpush.xiaomi.com（小米推送通道）； 
-
-6) TCP2195，gateway.push.apply.com（苹果推送通道）； 
-
-7) TCP 2196，feedback.push.apply.com（苹果推送通道（反馈））；
-
-### 如何设置防火墙入站规则
+### Windows防火墙如何开放端口
 
 - Windows server 2008以上，win7以上
 
@@ -140,19 +130,23 @@ mysqldump -uroot p - all-databases -v > backup.sql
 
 6.输入规则名称，完成即可。
 
-- CentOS7系统
+### Linux防火墙如何开放端口
 
+#### Firewall
+
+```
 firewall-cmd --zone=public --add-port={7006,7080,7443}/tcp --permanent && firewall-cmd --reload && firewall-cmd --zone=public --list-ports
+```
 
+#### Iptables
 
+```
+iptables -I INPUT -p tcp -m multiport --dports 7006,7080,7443 -j ACCEPT && service iptables save && service iptables restart
+```
 
-- CentOS 6、ubuntu16.04
+### 如何修改对客户端开放的端口
 
-  iptables -I INPUT -p tcp -m multiport --dports 7006,7080,7443 -j ACCEPT && service iptables save && service iptables restart
-
-### 如何修改有度对外网开放的端口
-
-　　有度需要对外网开放7006、7080、7443三个端口；以下以Windows为例讲解对外端口的修改办法：
+　　有度对外默认端口为7006、7080、7443；以下以Windows为例讲解对外端口的修改办法：
 
 1、在有度服务器上，登录mysql（可以使用sqlyog等工具)。
 
@@ -245,19 +239,23 @@ netBandwidth = 100  // 网络带宽：100, 单位: Mbps
 
 ## 登录问题
 
-### 登录提示无法获取服务器地址
+### 如何开通总机号登录
+
+　　本地部署版默认登录方式是服务器地址。如果希望客户端支持总机号登录方式，您的服务器需要支持固定公网IP，并已开放或配置端口映射7006,7080,7443，将您的总机号、公网IP地址发给有度技术支持处理即可。
+
+### 无法获取服务器地址
 
 1. 客户端访问地址是否正确；
 2. 7006,7080,7443端口通不通，均为TCP协议；
 3. 如果需要外网登录，请做端口映射；
-4. 内网服务器，请设置静态IP，不要使用DHCP获取IP；
+4. 内网有度服务器的IP地址，请设置静态IP，确保IP地址不会变化；
 
-### 登录提示无法连接服务器
+### 无法连接服务器
 
 1. 服务器防火墙是否开放7006端口；
 2. 服务端的jgmfront服务是否正常；
 
-### 登录提示服务器繁忙
+### 服务器繁忙
 
 1. 检查服务器资源负载是否正常；
 2. 如果帐号是第三方认证，第三方认证服务器、第三方认证设置、第三方认证插件等是否正常；
@@ -378,7 +376,7 @@ update emoa_acc.t_gid set authtype=2 WHERE acctype=0 AND authtype=0 AND deleted=
 
 ?>说明：服务器有触发文件服务停止的机制。当服务器的CPU使用率达到95%以上，jgproxy会停止文件服务（jgfile），所以请求会无法响应，这是为了防止服务器的性能进一步恶化。
 
-!>出现此情况，说明服务器的CPU负荷较高，待服务器CPU资源恢复正常后即可。请及时查看是哪些进程占用高导致的，如果是进程问题，联系我们分析，如果是服务器性能不足，请扩容CPU。建议您关注服务器性能情况，必要时可以考虑[文件服务独立部署](admin/unctions/filesvrdeploy)。
+!>出现此情况，说明服务器的CPU负荷较高，待服务器CPU资源恢复正常后即可。请及时查看是哪些进程占用高导致的，如果是进程问题，联系我们分析，如果是服务器性能不足，请扩容CPU。建议您关注服务器性能情况，必要时可以考虑[文件服务独立部署](admin/distributed_deployment/file_service/file_service)。
 
 如果想关闭或调整策略，可以编辑配置文件config/jgproxy.ini，修改[common]段，修改完毕后重启jgproxy生效。以下是说明：
 
@@ -387,7 +385,7 @@ cpuMonitorOn
 #开关，默认为1开启，0关闭。
 
 maxPermitCpuUsage
-3CPU使用率触发阈值，默认95（%）。
+#CPU使用率触发阈值，默认95（%）。
 
 cpuMonitorCheckDuration
 #监控间隔，默认5秒
