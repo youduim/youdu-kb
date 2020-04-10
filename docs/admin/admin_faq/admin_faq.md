@@ -17,7 +17,7 @@
 2. 查看selinux是否关闭，部分系统的selinux可能会影响有度服务运行；
 3. 若排查系统环境后，可以查看jgservice，是否有异常服务在重启；
 
-### 服务启动不了，命令窗口提示指定的服务已标记为删除
+### Windows服务端升级异常中断，导致服务启动时，提示服务已标记为删除
 
 1、升级有度服务，完成后管理后台登录不了，提示网页不存在。
 
@@ -36,7 +36,7 @@
 2. 设置mysql连接数，登录mysql执行以下语句
 
 ```mysql
-set GLOBAL max_connects = 500;
+set GLOBAL max_connections = 500;
 set GLOBAL max_connect_errors = 1000;
 ```
 
@@ -45,7 +45,7 @@ set GLOBAL max_connect_errors = 1000;
 4. 配置文件在`[mysqld]`添加参数
 
    ```ini
-   GLOBAL max_connects = 500
+   GLOBAL max_connections = 500
    GLOBAL max_connect_errors = 1000
    ```
 
@@ -146,7 +146,7 @@ iptables -I INPUT -p tcp -m multiport --dports 7006,7080,7443 -j ACCEPT && servi
 
 ### 如何修改对客户端开放的端口
 
-　　有度对外默认端口为7006、7080、7443；以下以Windows为例讲解对外端口的修改办法：
+　　有度对外默认端口为7006、7080、7443；以Windows为例讲解对外端口的修改办法：
 
 1、在有度服务器上，登录mysql（可以使用sqlyog等工具)。
 
@@ -173,7 +173,7 @@ update t_service_addr set port=7443的新端口号 where port=7443;
 
 修改`[:7443]`为`[:7443的新端口号]`
 
-4、修改打开功能配置
+4、修改打卡功能配置
 
 修改Server/apps/clockapp/config.properties
 
@@ -181,7 +181,7 @@ update t_service_addr set port=7443的新端口号 where port=7443;
 
 5、重启服务
 
-在有度经常中，杀掉以下进程即可（会自动重启):
+在有度服务进程中，结束以下进程即可（会自动重启):
 
 jgmfrontd、jgproxyd、jgclockapp
 
@@ -229,7 +229,7 @@ netBandwidth = 100  // 网络带宽：100, 单位: Mbps
 
 　　打开浏览器，输入有度管理后台地址：http://服务器IP:7080/userportal
 
-?>建议通过谷歌、火狐等浏览器访问。使用360等浏览器时，建议切换到内核、极速模式。
+?>建议通过谷歌、火狐等浏览器访问。使用360等浏览器时，建议切换到Chrome内核、极速模式。
 
 ### 如何添加多个有度后台管理员
 
