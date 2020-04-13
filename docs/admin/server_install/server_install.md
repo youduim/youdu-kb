@@ -148,7 +148,15 @@ mysqladmin -uroot password 'Youdu123!!'
 
 5. 执行有度安装脚本
 
-   ./linuxInstall 安装路径（不能选择安装包目录）
+   ./linuxInstall 安装路径
+
+   例如：
+
+   ```
+   ./linuxInstall /usr/local/youdu
+   ```
+
+   !>脚本后面必须指定安装路径,安装路径不能为安装包自身目录。
 
 6. 输入mysql用户名
 
