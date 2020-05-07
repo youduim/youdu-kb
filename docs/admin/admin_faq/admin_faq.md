@@ -459,7 +459,7 @@ private.storepath = E:\youdu_files
 
 　　目录列表：  
 　　文件服务。jgfile：avatar、files、off_files、org、rca_files、resum_files  
-　　网盘服务、群空间。jgnetdisk：netdisk_files
+　　网盘服务、群空间：jgnetdisk：netdisk_files
 
 ![1585636834512](1585636834512-1585706497330.png)
 
