@@ -11,4 +11,4 @@
 >
 > **Q   Q：2851351755  /  2850184518**
 
-![wechat_qr](img/wechat_qr.png)
+<img src="img/wechat_qr.png" alt="wechat_qr" style="zoom:67%;" />
