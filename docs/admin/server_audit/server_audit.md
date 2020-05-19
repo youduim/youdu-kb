@@ -44,7 +44,7 @@
 cat > /etc/yum.repos.d/mongodb‐org‐4.2.repo <<eof
 [mongodb‐org‐4.2]
 name=MongoDB Repository
-baseurl=https://mirrors.aliyun.com/mongodb/yum/redhat/7/mongodb‐org/4.2/x86_64/
+baseurl=https://mirrors.aliyun.com/mongodb/yum/redhat/7/mongodb-org/4.2/x86_64/
 gpgcheck=1
 enabled=1
 gpgkey=https://www.mongodb.org/static/pgp/server‐4.2.asc
