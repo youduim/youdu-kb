@@ -49,7 +49,7 @@ gpgcheck=1
 enabled=1
 gpgkey=https://www.mongodb.org/static/pgp/server-4.2.asc
 eof
-yum install ‐y mongodb-org
+yum install -y mongodb-org
 systemctl start mongod
 ```
 
