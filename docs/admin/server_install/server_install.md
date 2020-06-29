@@ -87,14 +87,14 @@ group_concat_max_len = 102400
 1. 添加yum源  
 
 ```
-cat > /etc/yum.repos.d/mysql-community.repo <<eof  
-[mysql57-community]  
-name=MySQL 5.7 Community Server  
-baseurl=https://mirrors.cloud.tencent.com/mysql/yum/mysql57-community-el7/  
-enabled=1  
-gpgcheck=1  
-gpgkey=http://repo.mysql.com/RPM-GPG-KEY-mysql  
-eof   
+cat > /etc/yum.repos.d/mysql-community.repo <<eof
+[mysql57-community]
+name=MySQL 5.7 Community Server
+baseurl=https://mirrors.cloud.tencent.com/mysql/yum/mysql57-community-el7/
+enabled=1 
+gpgcheck=1
+gpgkey=http://repo.mysql.com/RPM-GPG-KEY-mysql
+eof
 ```
 
 2. 安装mysql  
