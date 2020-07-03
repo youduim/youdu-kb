@@ -6,6 +6,7 @@
 * 管理员
   * [功能逻辑 ](admin/functions/_functions.md)
   * [常见问题](admin/admin_faq/admin_faq.md) 
+  * [有度管理后台使用手册](admin/Management_manual/Management_manual)
 * 安装、升级、备份恢复、迁移
   * [服务端安装](admin/server_install/server_install)
   * [消息审计安装](admin/server_audit/server_audit)
