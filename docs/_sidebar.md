@@ -2,6 +2,7 @@
 * 员工
   * [常见问题](staff/staff_faq/staff_faq.md)
   * [Windows客户端使用手册](staff/windows_manual/windows_manual)
+  * [移动客户端使用手册](staff/Mobile_manual/Mobile_manual)
 * 管理员
   * [功能逻辑 ](admin/functions/_functions.md)
   * [常见问题](admin/admin_faq/admin_faq.md) 
