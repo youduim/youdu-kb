@@ -35,7 +35,7 @@
 ### 2. 停止本机非代理相关服务
 
 ```
-#编辑path/config/service.ini #保留jgdns、jgmfront、jgproxy的state值为start，其它为stop 
+#编辑path/config/service.ini #保留jgproxy的state值为start，其它为stop 
  #例如：
  
 [jgaccountd]
@@ -69,33 +69,11 @@ vercode          = 19210023
 [jgaccountd]
 info.host          = main_ip
 info.virtual = true
-
-
 ```
 
-### 4. 停止有度服务，重命名登录服务名称
+### 
 
-```
-#进入path/bin
-#重命名jgmfront为jgmfrontd1
-#编辑path/config/service.ini
-#修改jgmfront读取程序名为jgmfrontd1.exe
-#例如：
-
-[jgmfrontd]
-cmd   = /bin/jgmfrontd1.exe
-```
-
-```
-#编辑path/config/svrlist.ini
-#把jgmfront重命名为jgmfront1
-#例如：
-
-[jgmfrontd1]
-info.host                = 127.0.0.1
-```
-
-### 5. 修改代理地址，并保存退出。
+### 4. 修改代理地址，并保存退出。
 
 ```
 #编辑path/config/jgproxy.ini
@@ -232,8 +210,8 @@ rules(/webchat/).path               = /
 rules(/webchat/).scheme             = https
 ```
 
-### 6. 启动代理服务器有度服务。
+### 5. 启动代理服务器有度服务。
 
-### 7. 外网端口映射至代理服务，客户端测试登录。
+### 6. 外网端口映射至代理服务，客户端测试登录。
 
-### 8. 完成登录服务代理服务器部署。
+### 7. 完成登录服务代理服务器部署。
