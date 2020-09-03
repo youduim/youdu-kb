@@ -108,7 +108,7 @@ yum -y install mysql-server mysql
 3. 优化参数  
 
 ```
-cat <<eof|tee /etc/my.cnf
+cat <<eof|tee -a /etc/my.cnf
 innodb_buffer_pool_size = 256M
 max_connections = 500
 max_connect_errors = 1000
